@@ -1,0 +1,27 @@
+name: Testes de QA
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Instalar dependências
+        run: npm ci
+      - name: Instalar navegador de teste
+        run: npx playwright install --with-deps chromium
+      - name: Testar servidor
+        run: npm test
+      - name: Testar demonstração no navegador
+        run: npm run test:browser

@@ -1,31 +1,28 @@
 # QA do Finanças a Dois
 
-Criei este repositório para testar o [Finanças a Dois](https://github.com/YannSantana/financas-a-dois) sem misturar o trabalho de QA com o código do aplicativo. A ideia é mostrar não só se um teste passou, mas **o que foi verificado, por que isso importa e o que ainda falta testar**.
+Este é meu projeto de testes para o [Finanças a Dois](https://github.com/YannSantana/financas-a-dois). Quis deixar registrado o caminho que segui: o que tentei, o que funcionou e o que ainda precisa de uma rodada com pessoas e contas reais de teste.
 
-## O que testei de verdade
+## O que já consegui testar
 
-A suíte automática sobe uma cópia temporária do aplicativo **sem Google e sem banco de dados**. Nesse modo, a apresentação deve continuar acessível, mas ninguém deve conseguir consultar ou gravar dados financeiros. Também verifico que arquivos internos não ficam disponíveis pela web e que uma origem externa não consegue acionar o logout.
+- **Sem login e sem banco:** a página abre, mas as rotas financeiras não entregam nem gravam dados. Também conferi o bloqueio de arquivos internos e de um pedido de logout vindo de outro site.
+- **Com um banco descartável:** criei Ana e Beto, duas pessoas fictícias no mesmo espaço. Lancei despesas compartilhadas e pessoais, conferi os totais de outubro e tentei editar um lançamento da outra pessoa. Testei também o limite de uma meta ativa no plano gratuito. As sessões foram criadas só para o teste, sem passar pelo Google.
+- **No navegador:** percorri a demonstração em tela grande e celular, usei busca e filtros e tentei salvar um lançamento sem conta. O aplicativo pediu login e não gravou os dados fictícios.
 
-Os testes cobrem:
+Na execução local de 06/10/2026, **15 testes passaram**: 11 no servidor e 4 no navegador. O teste de celular encontrou um problema no menu, que foi corrigido no [aplicativo](https://github.com/YannSantana/financas-a-dois). Os detalhes estão em [RELATORIO.md](RELATORIO.md). O [GitHub Actions](https://github.com/YannSantana/qa-financas-a-dois/actions) repete os testes a cada atualização.
 
-1. Página inicial e imagem da apresentação.
-2. Avisos de integrações desativadas e estado do banco.
-3. Bloqueio de leitura de sessão e gravação de lançamentos, metas e limites sem banco.
-4. Bloqueio do login Google e da verificação do WhatsApp quando não configurados.
-5. Proteção de arquivos internos e validação da origem no logout.
+## Como rodar
 
-Na primeira execução, **8 testes passaram, 0 falharam e 0 foram bloqueados**. Veja o [relatório](RELATORIO.md) para o ambiente e o limite dessa conclusão.
-
-## Como repetir
-
-Você precisa de Node.js 22 ou superior, npm, Git e internet para baixar uma cópia temporária do aplicativo. Depois:
+É preciso Node.js 22 ou superior, npm, Git e acesso à internet. Rode:
 
 ```bash
+npm ci
 npm test
+npx playwright install chromium
+npm run test:browser
 ```
 
-O teste baixa o repositório do aplicativo, instala as dependências nessa cópia temporária, inicia o servidor em uma porta local, faz as verificações e limpa os arquivos temporários ao terminar. Ele não usa sua conta Google nem altera seus dados.
+Os testes baixam uma cópia temporária do aplicativo e apagam os dados de teste no fim. Não usam conta Google nem mexem em informações pessoais.
 
-## O que falta
+## Próximos passos
 
-Este é um teste do **modo demonstração**, não da aplicação inteira. Ainda preciso validar login real, lançamentos compartilhados e pessoais, cálculo dos totais, convites e metas com um banco e contas de teste. Deixei esses cenários descritos em [Plano de testes](PLANO-DE-TESTES.md), com status **não executado**. Não apresento esses fluxos como aprovados antes de testá-los.
+Ainda falta uma rodada em um ambiente de homologação publicado, com banco separado, duas contas Google de teste e integrações configuradas. Login real, convite, edição e exclusão de lançamentos próprios, contribuições para metas e WhatsApp continuam no [plano](PLANO-DE-TESTES.md). Eles **não estão aprovados** só porque os testes acima passaram.

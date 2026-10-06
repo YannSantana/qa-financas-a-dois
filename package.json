@@ -7,6 +7,10 @@
     "node": ">=22"
   },
   "scripts": {
-    "test": "node --test tests/*.test.mjs"
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "playwright test browser --workers=1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0"
   }
 }
