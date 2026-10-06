@@ -19,4 +19,10 @@ No primeiro teste em largura de celular, o menu abria, mas a seção “Recursos
 
 ## Até onde vai esta conclusão
 
-As duas sessões usadas no teste financeiro foram criadas diretamente no banco. Isso permite verificar permissões e cálculos, mas **não testa o login com Google**. Também não publiquei ainda um ambiente de homologação permanente, nem executei convite, edição ou exclusão de lançamento próprio, contribuição para meta e WhatsApp. Esses itens seguem abertos no [plano](PLANO-DE-TESTES.md). O resultado do GitHub Actions ficará visível na [aba Actions](https://github.com/YannSantana/qa-financas-a-dois/actions).
+As duas sessões usadas no teste financeiro foram criadas diretamente no banco. Isso permite verificar permissões e cálculos, mas **não testa o login com Google**. Convite, edição ou exclusão de lançamento próprio, contribuição para meta e WhatsApp seguem abertos no [plano](PLANO-DE-TESTES.md).
+
+## Homologação e execução no GitHub
+
+Publiquei um ambiente separado no [Render](https://financas-a-dois-qa-yannsantana.onrender.com), com banco próprio. O deploy ficou ativo e o health check público respondeu `{"ok":true,"database":"connected"}` em 06/10/2026. Isso confirma que o servidor consegue consultar o banco; os fluxos autenticados ainda precisam de uma rodada com Google configurado.
+
+Os 15 testes passaram também nesta [execução no GitHub Actions](https://github.com/YannSantana/qa-financas-a-dois/actions/runs/37489441329). O banco gratuito de homologação expira em 05/11/2026. O ambiente usa dados de teste e não deve receber informações financeiras reais.

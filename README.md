@@ -23,6 +23,12 @@ npm run test:browser
 
 Os testes baixam uma cópia temporária do aplicativo e apagam os dados de teste no fim. Não usam conta Google nem mexem em informações pessoais.
 
+## Ambiente publicado para testes
+
+A homologação está no [Render](https://financas-a-dois-qa-yannsantana.onrender.com), com um banco próprio. Em 06/10/2026, o [health check](https://financas-a-dois-qa-yannsantana.onrender.com/api/health) respondeu com `ok: true` e `database: connected`. Os 15 testes também passaram nesta [execução do GitHub Actions](https://github.com/YannSantana/qa-financas-a-dois/actions/runs/37489441329).
+
+Use apenas dados fictícios nesse ambiente. O banco gratuito expira em **05/11/2026**; o site pode demorar para abrir depois de ficar sem uso. O login Google ainda precisa ser configurado para a rodada com duas contas de teste.
+
 ## Próximos passos
 
-Ainda falta uma rodada em um ambiente de homologação publicado, com banco separado, duas contas Google de teste e integrações configuradas. Login real, convite, edição e exclusão de lançamentos próprios, contribuições para metas e WhatsApp continuam no [plano](PLANO-DE-TESTES.md). Eles **não estão aprovados** só porque os testes acima passaram.
+Ainda falta uma rodada na homologação com duas contas Google de teste e integrações configuradas. Login real, convite, edição e exclusão de lançamentos próprios, contribuições para metas e WhatsApp continuam no [plano](PLANO-DE-TESTES.md). Eles **não estão aprovados** só porque os testes acima passaram.
